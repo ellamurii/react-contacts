@@ -1,6 +1,7 @@
-import { ActionIcon, Button, Card, Divider, Flex, Grid, Group, Image, Stack, Text } from '@mantine/core';
-import { HiOutlineHeart, HiLink, HiOutlineMail, HiOutlinePencilAlt, HiOutlineTrash, HiPhone } from 'react-icons/hi';
+import { ActionIcon, Button, Card, Divider, Grid, Group, Image } from '@mantine/core';
+import { HiOutlineHeart, HiLink, HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi';
 import { useFetch } from '../hooks/useFetch';
+import UserDetails from './UserDetails';
 
 const GET_USERS_API = 'https://jsonplaceholder.typicode.com/users';
 interface User {
@@ -28,23 +29,7 @@ const UserList = () => {
                 pt={10}
               />
             </Card.Section>
-            <Stack spacing={5} mt="md" mb="xs">
-              <Text weight={500} variant="gradient" gradient={{ from: 'indigo', to: 'cyan', deg: 45 }}>
-                {user.name}
-              </Text>
-              <Flex align="center" gap={8}>
-                <HiOutlineMail />
-                <Text size="sm" color="gray.7" display="flex">
-                  {user.email}
-                </Text>
-              </Flex>
-              <Flex align="center" gap={8}>
-                <HiPhone />
-                <Text size="sm" color="gray.7">
-                  {user.phone}
-                </Text>
-              </Flex>
-            </Stack>
+            <UserDetails {...user} />
             <Button
               variant="light"
               color="blue"
