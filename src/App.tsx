@@ -1,10 +1,13 @@
 import { MantineProvider } from '@mantine/core';
-import UserList from './components/UserList';
+import { Routes, Route } from 'react-router-dom';
+import Users from './pages/Users';
 
 function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <UserList />
+      <Routes>
+        <Route path="/" element={<Users />} />
+      </Routes>
     </MantineProvider>
   );
 }

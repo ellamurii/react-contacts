@@ -1,15 +1,16 @@
-import { ActionIcon, Button, Card, Divider, Grid, Group, LoadingOverlay } from '@mantine/core';
+import { ActionIcon, Button, Card, Divider, Grid, Group } from '@mantine/core';
 import { HiOutlineHeart, HiLink, HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi';
 import UserDetails from './UserDetails';
-import { useFetchUserList } from '../hooks/useFetchUserList';
 import UserAvatar from './UserAvatar';
 
-const UserList = () => {
-  const { data, loading } = useFetchUserList();
+interface UserListProps {
+  users: User[];
+}
+
+const UserList = ({ users }: UserListProps) => {
   return (
     <Grid m={20}>
-      <LoadingOverlay visible={loading} overlayOpacity={1} />
-      {data?.map((user) => (
+      {users.map((user) => (
         <Grid.Col key={user.id} xs={12} sm={6} lg={3}>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Card.Section bg="blue.1">
