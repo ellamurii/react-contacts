@@ -28,6 +28,7 @@ const UserList = ({ users }: UserListProps) => {
               target="_blank"
               rel="noreferrer noopener"
               leftIcon={<HiLink />}
+              data-testid="user-website"
             >
               {user.website}
             </Button>

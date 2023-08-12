@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import UserDetails from './UserDetails';
+import UserDetails from '../../components/UserDetails';
 
 describe('<UserDetails />', () => {
   const user = {

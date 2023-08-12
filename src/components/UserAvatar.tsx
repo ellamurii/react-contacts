@@ -7,7 +7,11 @@ interface UserAvatarProps {
 
 const UserAvatar = ({ username }: UserAvatarProps) => {
   const { data, loading } = useFetchAvatar(username);
-  return loading ? <Skeleton height={180} animate /> : <Image src={data} height={180} alt="Norway" fit="contain" />;
+  return loading ? (
+    <Skeleton data-testid="avatar-skeleton" height={180} animate />
+  ) : (
+    <Image data-testid="avatar-img" src={data} height={180} alt={username} fit="contain" />
+  );
 };
 
 export default UserAvatar;
