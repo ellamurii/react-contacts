@@ -1,24 +1,30 @@
 import { useState, useEffect } from 'react';
+import { usersApi } from '../api/users';
+import { delay } from '../utils/delay';
 
-interface FetchResult<T> {
-  data: T | undefined;
+interface FetchResult {
+  data: User[] | undefined;
   error: unknown;
   loading: boolean;
 }
 // can use axios + react-query
-export const useFetch = <T>(url: string): FetchResult<T> => {
-  const [data, setData] = useState<T | undefined>();
+export const useFetchUserList = (): FetchResult => {
+  const [data, setData] = useState<User[] | undefined>();
   const [error, setError] = useState<unknown>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch(url)
-      .then((response) => response.json())
-      .then((responseData: T) => setData(responseData))
+
+    usersApi
+      .get()
+      .then(async (res) => {
+        await delay();
+        setData(res);
+      })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
-  }, [url]);
+  }, []);
 
   return { data, error, loading };
 };

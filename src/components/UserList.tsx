@@ -1,33 +1,19 @@
-import { ActionIcon, Button, Card, Divider, Grid, Group, Image } from '@mantine/core';
+import { ActionIcon, Button, Card, Divider, Grid, Group, LoadingOverlay } from '@mantine/core';
 import { HiOutlineHeart, HiLink, HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi';
-import { useFetch } from '../hooks/useFetch';
 import UserDetails from './UserDetails';
-
-const GET_USERS_API = 'https://jsonplaceholder.typicode.com/users';
-interface User {
-  id: number;
-  name: string;
-  phone: string;
-  username: string;
-  website: string;
-  email: string;
-}
+import { useFetchUserList } from '../hooks/useFetchUserList';
+import UserAvatar from './UserAvatar';
 
 const UserList = () => {
-  const { data } = useFetch<User[]>(GET_USERS_API);
+  const { data, loading } = useFetchUserList();
   return (
     <Grid m={20}>
+      <LoadingOverlay visible={loading} overlayOpacity={1} />
       {data?.map((user) => (
         <Grid.Col key={user.id} xs={12} sm={6} lg={3}>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Card.Section bg="blue.1">
-              <Image
-                src={`https://avatars.dicebear.com/v2/avataaars/${user.name}.svg?options[mood][]=happy `}
-                height={180}
-                alt="Norway"
-                fit="contain"
-                pt={10}
-              />
+              <UserAvatar username={user.username} />
             </Card.Section>
             <UserDetails {...user} />
             <Button
